@@ -268,38 +268,10 @@ def get_chain(openai_api_key=None):
                               chat_memory=StreamlitChatMessageHistory(key="langchain_messages"))
     return chain
 
-def get_secret_or_input(secret_key, secret_name, info_link=None):
-    if secret_key in st.secrets:
-        st.write("Found %s secret" % secret_key)
-        secret_value = st.secrets[secret_key]
-    else:
-        st.write(f"Please provide your {secret_name}")
-        secret_value = st.text_input(secret_key, key=f"input_{secret_key}", type="password")
-        if secret_value:
-            st.session_state[secret_key] = secret_value
-        if info_link:
-            st.markdown(f"[Get an {secret_name}]({info_link})")
-    return secret_value
-
 # ==================================
 # Run streamlit app
 # ==================================
 def run():
-    #ready = True
-
-    #openai_api_key = st.session_state.get("OPENAI_API_KEY")
-    #huggingfacehub = st.session_state.get("HUGGINGFACEHUB_API_TOKEN")
-
-    #with st.sidebar:
-    #    if not openai_api_key:
-    #        openai_api_key = get_secret_or_input('OPENAI_API_KEY', "OpenAI API Key", info_link="https://platform.openai.com/account/api-keys")
-    #    if not openai_api_key:
-    #        st.warning("Missing OPENAI_API_KEY")
-    #       ready = False
-        #if not huggingfacehub_api_token:
-        #    st.warning("Missing HUGGINGFACEHUB_API_TOKEN")
-        #    ready = False
-    
     chain = get_chain(openai_api_key=os.environ["OPENAI_API_KEY"])
     st.subheader("How can I help you with your pet?")
     show_ui(chain, "Please describe your pet's symptoms.")
