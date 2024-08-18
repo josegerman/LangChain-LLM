@@ -8,14 +8,15 @@
 # =====================================
 import os
 
+from dotenv import load_dotenv
 #from langchain_community.vectorstores import Chroma # <-- deprecated; using below instead
 from langchain_chroma import Chroma
 from langchain_openai import OpenAIEmbeddings
 
-# =====================================
-# OpenAI Key
-# =====================================
-os.environ["OPENAI_API_KEY"] = 'sk-proj-q5W3UsdLijEDNAV3HP45T3BlbkFJgVoJRzgYZCLuh4IELyuP'
+# ==================================
+# Load .env variables
+# ==================================
+load_dotenv()
 
 # =====================================
 # Define the persistent directory

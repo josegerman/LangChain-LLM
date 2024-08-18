@@ -1,5 +1,6 @@
 
-#from dotenv import load_dotenv
+import os
+from dotenv import load_dotenv
 import pandas as pd
 import openai
 import streamlit as stl
@@ -9,11 +10,11 @@ from langchain.chains import RetrievalQA
 from langchain_openai import ChatOpenAI
 
 # Load environment variables from .env
-#load_dotenv()
+load_dotenv()
 
 #Setting up API key and initializing embedding object with the key.
-openai.api_key=('sk-proj-q5W3UsdLijEDNAV3HP45T3BlbkFJgVoJRzgYZCLuh4IELyuP')
-embedding=OpenAIEmbeddings(api_key='sk-proj-q5W3UsdLijEDNAV3HP45T3BlbkFJgVoJRzgYZCLuh4IELyuP')
+openai.api_key=(os.environ["OPENAI_API_KEY"])
+embedding=OpenAIEmbeddings(api_key=os.environ["OPENAI_API_KEY"])
 
 #Initializing the file path to create a dataframe object and return the content in csv to it.
 def loading_data(file_path):
@@ -44,7 +45,7 @@ vectordb = Chroma.from_documents(documents=documents,embedding=embedding,persist
 
 #Initializing ChatOpenAI model by declaring the model name and related parameters.
 llm_model = 'gpt-3.5-turbo'
-llm = ChatOpenAI(model_name=llm_model, temperature=1, api_key=openai.api_key,organization='org-hbe2dl1aCF5hd5z1KxGvHpob')
+llm = ChatOpenAI(model_name=llm_model, temperature=1, api_key=openai.api_key, organization='org-hbe2dl1aCF5hd5z1KxGvHpob')
 
 #Initialize the RetrievalQA chain
 qa_chain_default =RetrievalQA.from_chain_type(llm,
