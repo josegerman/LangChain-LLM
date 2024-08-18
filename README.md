@@ -1,7 +1,7 @@
 Hi, welcome to my GitHub!
 
 In this repository you will find a few projects primarily demostrating LangChain capabilities along with OpenAI's LLM.
-LangChain is a large language model (LLM) integration framework. It allows developers to connect LLM with external data sources.
+LangChain (https://www.langchain.com) is a large language model (LLM) integration framework. It allows developers to connect LLM with external data sources.
 Some of its use-cases include chatbots, retrieval-augmented generation (RAG), document summarization and synthetic data generation.
 
 1. Basic chat models
