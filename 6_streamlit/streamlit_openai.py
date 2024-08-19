@@ -1,12 +1,20 @@
+# ==================================
+# About:
+# ==================================
+# Basic streamlit app with OpenAI
+
+import os
+from dotenv import load_dotenv
 from openai import OpenAI
 import streamlit as st
 
+# ==================================
+# Load .env variables
+# ==================================
+load_dotenv()
+
 with st.sidebar:
-    #openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
-    openai_api_key = 'sk-proj-q5W3UsdLijEDNAV3HP45T3BlbkFJgVoJRzgYZCLuh4IELyuP'
-    "[Get an OpenAI API key](https://platform.openai.com/account/api-keys)"
-    "[View the source code](https://github.com/streamlit/llm-examples/blob/main/Chatbot.py)"
-    "[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/streamlit/llm-examples?quickstart=1)"
+    openai_api_key = os.environ["OPENAI_API_KEY"]
 
 st.title("💬 Chatbot")
 st.caption("🚀 A Streamlit chatbot powered by OpenAI")
@@ -17,9 +25,9 @@ for msg in st.session_state.messages:
     st.chat_message(msg["role"]).write(msg["content"])
 
 if prompt := st.chat_input():
-    if not openai_api_key:
-        st.info("Please add your OpenAI API key to continue.")
-        st.stop()
+    #if not openai_api_key:
+    #    st.info("Please add your OpenAI API key to continue.")
+    #    st.stop()
 
     client = OpenAI(api_key=openai_api_key)
     st.session_state.messages.append({"role": "user", "content": prompt})
@@ -28,3 +36,8 @@ if prompt := st.chat_input():
     msg = response.choices[0].message.content
     st.session_state.messages.append({"role": "assistant", "content": msg})
     st.chat_message("assistant").write(msg)
+
+# ==================================
+# To execute:
+# ==================================
+# streamlit run C:\_DEV\VSCode\Workspaces\lanchain-llm\6_streamlit\streamlit_openai.py
