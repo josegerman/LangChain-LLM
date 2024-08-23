@@ -126,7 +126,7 @@ def load_txt_files(data_dir="petmed_ai\data"):
 # ==================================
 def get_model(repo_id=ZEPHYR_ID, **kwargs):
     if repo_id == "ChatGPT":
-        chat_model = ChatOpenAI(model="gpt-3.5-turbo", temperature=0, **kwargs) # added model
+        chat_model = ChatOpenAI(model="gpt-4o", temperature=0, **kwargs) # added model
     else:
         huggingfacehub_api_token = kwargs.get("token", None)
         if not huggingfacehub_api_token:
