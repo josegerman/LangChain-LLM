@@ -4,13 +4,19 @@ from langchain.schema.output_parser import StrOutputParser
 from langchain.schema.runnable import RunnableLambda
 from langchain_openai import ChatOpenAI
 
+# ===========================
 # Load environment variables from .env
+# ===========================
 load_dotenv()
 
+# ===========================
 # Create a ChatOpenAI model
+# ===========================
 model = ChatOpenAI(model="gpt-4o")
 
+# ===========================
 # Define prompt templates
+# ===========================
 prompt_template = ChatPromptTemplate.from_messages(
     [
         ("system", "You are a comedian who tells jokes about {topic}."),
@@ -18,15 +24,25 @@ prompt_template = ChatPromptTemplate.from_messages(
     ]
 )
 
+# ===========================
 # Define additional processing steps using RunnableLambda
+# ===========================
+# RunnableLambda us usuable to perform other tasks not normally found as part of the langchain framework
+# For example, you can make API calls or run custom code
 uppercase_output = RunnableLambda(lambda x: x.upper())
 count_words = RunnableLambda(lambda x: f"Word count: {len(x.split())}\n{x}")
 
+# ===========================
 # Create the combined chain using LangChain Expression Language (LCEL)
+# ===========================
 chain = prompt_template | model | StrOutputParser() | uppercase_output | count_words
 
+# ===========================
 # Run the chain
+# ===========================
 result = chain.invoke({"topic": "lawyers", "joke_count": 3})
 
+# ===========================
 # Output
-print(result)s
+# ===========================
+print(result) 
