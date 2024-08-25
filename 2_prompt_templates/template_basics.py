@@ -56,6 +56,7 @@ print(prompt)
 # This does NOT work:
 # ===========================
 # You cannot do interpolation on the HumanMessage or inserting a value in {joke_count}
+# The message must be in a tuple format
 # messages = [
 #     ("system", "You are a comedian who tells jokes about {topic}."),
 #     HumanMessage(content="Tell me {joke_count} jokes."),
